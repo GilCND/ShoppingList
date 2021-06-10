@@ -15,6 +15,9 @@
 		60309A5D2670F1E000047AD5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60309A5B2670F1E000047AD5 /* LaunchScreen.storyboard */; };
 		60309A682670F1E000047AD5 /* ShoppingListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60309A672670F1E000047AD5 /* ShoppingListTests.swift */; };
 		60309A732670F1E000047AD5 /* ShoppingListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60309A722670F1E000047AD5 /* ShoppingListUITests.swift */; };
+		60DA7C612672566400DB6488 /* ShoppingListDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 60DA7C5F2672566400DB6488 /* ShoppingListDataModel.xcdatamodeld */; };
+		60DA7CA326725D7400DB6488 /* ProductList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DA7CA126725D7400DB6488 /* ProductList+CoreDataClass.swift */; };
+		60DA7CA426725D7400DB6488 /* ProductList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DA7CA226725D7400DB6488 /* ProductList+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		60309A6E2670F1E000047AD5 /* ShoppingListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShoppingListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		60309A722670F1E000047AD5 /* ShoppingListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListUITests.swift; sourceTree = "<group>"; };
 		60309A742670F1E000047AD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60DA7C602672566400DB6488 /* ShoppingListDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShoppingListDataModel.xcdatamodel; sourceTree = "<group>"; };
+		60DA7CA126725D7400DB6488 /* ProductList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductList+CoreDataClass.swift"; sourceTree = "<group>"; };
+		60DA7CA226725D7400DB6488 /* ProductList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductList+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,7 @@
 		60309A4F2670F1DF00047AD5 /* ShoppingList */ = {
 			isa = PBXGroup;
 			children = (
+				60DA7CA526725D8200DB6488 /* Model */,
 				60309A502670F1DF00047AD5 /* AppDelegate.swift */,
 				60309A522670F1DF00047AD5 /* SceneDelegate.swift */,
 				60309A542670F1DF00047AD5 /* ViewController.swift */,
@@ -106,6 +113,7 @@
 				60309A592670F1E000047AD5 /* Assets.xcassets */,
 				60309A5B2670F1E000047AD5 /* LaunchScreen.storyboard */,
 				60309A5E2670F1E000047AD5 /* Info.plist */,
+				60DA7C5F2672566400DB6488 /* ShoppingListDataModel.xcdatamodeld */,
 			);
 			path = ShoppingList;
 			sourceTree = "<group>";
@@ -126,6 +134,15 @@
 				60309A742670F1E000047AD5 /* Info.plist */,
 			);
 			path = ShoppingListUITests;
+			sourceTree = "<group>";
+		};
+		60DA7CA526725D8200DB6488 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				60DA7CA126725D7400DB6488 /* ProductList+CoreDataClass.swift */,
+				60DA7CA226725D7400DB6488 /* ProductList+CoreDataProperties.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +276,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				60309A552670F1DF00047AD5 /* ViewController.swift in Sources */,
+				60DA7C612672566400DB6488 /* ShoppingListDataModel.xcdatamodeld in Sources */,
 				60309A512670F1DF00047AD5 /* AppDelegate.swift in Sources */,
+				60DA7CA326725D7400DB6488 /* ProductList+CoreDataClass.swift in Sources */,
 				60309A532670F1DF00047AD5 /* SceneDelegate.swift in Sources */,
+				60DA7CA426725D7400DB6488 /* ProductList+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,6 +613,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		60DA7C5F2672566400DB6488 /* ShoppingListDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				60DA7C602672566400DB6488 /* ShoppingListDataModel.xcdatamodel */,
+			);
+			currentVersion = 60DA7C602672566400DB6488 /* ShoppingListDataModel.xcdatamodel */;
+			path = ShoppingListDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 60309A452670F1DE00047AD5 /* Project object */;
 }

@@ -10,13 +10,18 @@ import UIKit
 class ViewController: UITableViewController {
     
     var shoppingList = [String]()
-    var packingList = [String]()
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addItem))
-        
+        let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addItem))
+        let emailList = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(emailList))
+        let saveList = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveList))
+        navigationItem.rightBarButtonItems = [addItem]
+        navigationItem.leftBarButtonItems = [saveList, emailList]
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     @objc private func addItem(edit: Bool, index: Int) {
         let alertController = UIAlertController(title: "Enter product", message: nil, preferredStyle: .alert)
@@ -25,6 +30,7 @@ class ViewController: UITableViewController {
         let submitAction = UIAlertAction(title: "submit", style: .default) {
             [weak self, weak alertController] action in
             guard let answer = alertController?.textFields?[0].text else { return }
+            
             if edit == true {
                 self?.edit(answer, index: index)
             } else {
@@ -35,11 +41,22 @@ class ViewController: UITableViewController {
         present(alertController, animated: true)
     }
     
+    private func loadData() {
+        #warning("Implement fetch")
+    }
+    
+    @objc private func saveList() {
+        #warning("Implement saving to Core Data")
+    }
+    
+    @objc private func emailList() {
+        #warning("Implement new function, send list by e-mail")
+    }
+    
     private func submit(_ answer: String) {
         shoppingList.insert(answer, at: 0)
         let indexPath = IndexPath (row: 0, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
-        return
     }
     
     private func edit(_ answer: String, index: Int) {
@@ -63,17 +80,8 @@ extension ViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-
-        #warning("Need implementation, select the cell and mark with a V for items already on cart")
-//           if let cell = tableView.cellForRow(at: indexPath) {
-//                cell.accessoryType = .checkmark
-//            cell.setSelected(false, animated: true)
-//           }
-
-    }
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-
+        
         let editAction = UIContextualAction(style: .destructive, title: "Edit", handler: { (action, view, completion) in
             self.shoppingList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -81,6 +89,7 @@ extension ViewController {
             completion(true)
         })
         editAction.backgroundColor = UIColor.blue
+        
         let deleteAction = UIContextualAction(style: .normal, title: "Delete", handler: { (action, view, completion) in
             self.shoppingList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -93,4 +102,23 @@ extension ViewController {
         
         return config
     }
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let completeAction = UIContextualAction(style: .normal, title: "Checked", handler: { (action, view, completion) in
+            if let cell = tableView.cellForRow(at: indexPath) {
+                if cell.accessoryType == .checkmark {
+                    cell.accessoryType = .none
+                } else {
+                    cell.accessoryType = .checkmark
+                }
+            }
+            completion(true)
+        })
+        completeAction.backgroundColor = UIColor.systemGreen
+        
+        let config = UISwipeActionsConfiguration(actions: [completeAction])
+        config.performsFirstActionWithFullSwipe = true
+        return config
+    }
+    
 }

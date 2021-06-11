@@ -29,7 +29,7 @@ class ViewController: UITableViewController {
         
         let submitAction = UIAlertAction(title: "submit", style: .default) {
             [weak self, weak alertController] action in
-            guard let answer = alertController?.textFields?[0].text else { return }
+            guard let answer = alertController?.textFields?.first?.text else { return }
             
             if edit == true {
                 self?.edit(answer, index: index)
@@ -82,7 +82,8 @@ extension ViewController {
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let editAction = UIContextualAction(style: .destructive, title: "Edit", handler: { (action, view, completion) in
+        let editAction = UIContextualAction(style: .destructive, title: "Edit", handler: { [weak self] (action, view, completion)  in
+            guard let self = self else { return }
             self.shoppingList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             self.addItem(edit: true, index: indexPath.row)
@@ -90,7 +91,8 @@ extension ViewController {
         })
         editAction.backgroundColor = UIColor.blue
         
-        let deleteAction = UIContextualAction(style: .normal, title: "Delete", handler: { (action, view, completion) in
+        let deleteAction = UIContextualAction(style: .normal, title: "Delete", handler: { [weak self] (action, view, completion) in
+            guard let self = self else { return }
             self.shoppingList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             completion(true)
